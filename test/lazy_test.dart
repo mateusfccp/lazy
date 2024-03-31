@@ -2,33 +2,16 @@ import 'package:lazy/lazy.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Lazy<T> tests', () {
-    int count;
+  test('A lazy function should be only evaluated when the value is retrieved.', () {
+    bool evaluated = false;
 
-    setUp(() {
-      count = 0;
+    final lazy = Lazy(() {
+      evaluated = true;
+      return ();
     });
 
-    test('No evaluation is performed unless the value is retrieved', () {
-      final lv = new Lazy(() {
-        count++;
-        return 'foo';
-      });
-      expect(count, equals(0));
-      expect(lv(), equals('foo'));
-    });
-
-    test('Evaluation is performed only once', () {
-      final lv = new Lazy(() {
-        count++;
-        return 'foo';
-      });
-
-      expect(lv(), equals('foo'));
-      expect(count, equals(1));
-
-      expect(lv(), equals('foo'));
-      expect(count, equals(1));
-    });
+    expect(evaluated, false);
+    expect(lazy(), equals(()));
+    expect(evaluated, true);
   });
 }

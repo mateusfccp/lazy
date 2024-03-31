@@ -1,7 +1,5 @@
 # lazy
 
-[![Build Status](https://travis-ci.org/fluidic/lazy.svg?branch=master)](https://travis-ci.org/fluidic/lazy)
-
 A library adding lazy evaluation to Dart. This package is based on Günter Zöchbauer's answer on the StackOverflow question [How to do lazy evaluation in Dart?][question].
 
 [question]: http://stackoverflow.com/questions/33218987/how-to-do-lazy-evaluation-in-dart
@@ -13,20 +11,20 @@ A simple usage example:
 ```dart
 import 'package:lazy/lazy.dart';
 
-class LazyValue {
-  Lazy<int> _v = new Lazy<int>(() {
+class Foo {
+  final _value = LazyValue(() {
     print('lazy');
     return 10;
   });
 
-  int get v => _v();
+  int get value => _value();
 }
 
 main() {
-  final lazy = new LazyValue();
-  print(lazy.v);
+  final foo = Foo();
+  print(foo.value);
   // Print lazy, then 10
-  print(lazy.v);
+  print(foo.value);
   // Print only 10.
 }
 ```
@@ -35,4 +33,4 @@ main() {
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: https://github.com/fluidic/lazy/issues
+[tracker]: https://github.com/mateusfccp/lazy/issues
